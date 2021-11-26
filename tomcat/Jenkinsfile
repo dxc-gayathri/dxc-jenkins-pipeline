@@ -4,6 +4,11 @@ pipeline{
     tools{
         maven "jenkins-mvn"
     }
+    environment{
+        tomcatWebLocation='D:\\Zartab\\Trainings\\DXC Jenkins Training Nov 2021\\apache-tomcat-9.0.55\\apache-tomcat-9.0.55\\webapps'
+        tomcatBinLocation='D:\\Zartab\\Trainings\\DXC Jenkins Training Nov 2021\\apache-tomcat-9.0.55\\apache-tomcat-9.0.55\\bin'
+        buildLocation="C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\dxc-deploy-to-tomcat-pipeline\\mywebapp\\target\\mywebapp.war"
+    }
 
     stages{
 
@@ -23,5 +28,15 @@ pipeline{
             }
         }
 
+    }
+
+    post{
+        success{
+
+            bat """
+                copy %buildLocation% %tomcatWebLocation%
+            """
+
+        }
     }
 }
