@@ -34,7 +34,7 @@ pipeline{
         success{
 
             bat """
-                copy %buildLocation% %tomcatWebLocation%
+                copy %buildLocation% \\ %tomcatWebLocation%
             """
 
         }
